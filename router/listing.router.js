@@ -13,6 +13,11 @@ import {
   toggleBlockListing,
   searchListings
 } from '../controller/listing.controller.js';
+import {
+  toggleFavoriteListing,
+  getFavoriteListings,
+  checkIfFavorited
+} from '../controller/favorite.controller.js';
 import { authMiddleware, adminMiddleware } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -29,6 +34,11 @@ router.get('/:id', authMiddleware, getListingById); // Tək elan
 router.put('/:id', authMiddleware, updateListing); // Elanı yenilə
 router.patch('/:id/extend', authMiddleware, extendListing); // Elan vaxtını uzat
 router.delete('/:id', authMiddleware, deleteListing); // Elanı sil
+
+// Favorites routes
+router.post('/:listingId/favorite', authMiddleware, toggleFavoriteListing); // Bəyən/bəyənmə
+router.get('/favorites/my', authMiddleware, getFavoriteListings); // Bəyənilənləri gətir
+router.get('/:listingId/favorite/check', authMiddleware, checkIfFavorited); // Bəyənilənmi yoxla
 
 // Cütləşdirmə routes
 router.post('/:listingId/pair-request', authMiddleware, sendPairRequest); // Sorğu göndər

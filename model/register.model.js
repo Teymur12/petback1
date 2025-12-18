@@ -40,7 +40,7 @@ const registerSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  
+
   // ✅ EMAIL VERIFICATION SAHƏLƏRI (Brevo üçün)
   verificationCode: {
     type: String,
@@ -54,7 +54,7 @@ const registerSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  
+
   // ✅ PASSWORD RESET SAHƏLƏRI (Brevo üçün)
   resetPasswordToken: {
     type: String,
@@ -63,7 +63,13 @@ const registerSchema = new mongoose.Schema({
   resetPasswordExpire: {
     type: Date,
     default: null
-  }
+  },
+
+  // ✅ FAVORITE LISTINGS
+  favoriteListings: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Listing'
+  }]
 }, {
   timestamps: true
 });
